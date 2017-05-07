@@ -1,0 +1,41 @@
+setwd("C:/Users/MAHE/Downloads")
+mydata<-read.csv("kmeansstock.csv")
+
+open<-mydata[2678:1166,2]
+high<-mydata[0:50,3]
+low<-mydata[0:50,4]
+close<-mydata[0:50,5]
+
+
+
+model <- lm(close ~ (open+high+low),data = mydata)
+model
+
+coff1 <- coef(model)
+
+coff1
+
+open<-mydata[50:100,2]
+high<-mydata[50:100,3]
+low<-mydata[50:100,4]
+
+#close1=0;
+
+i=1
+
+for(i in 0:10){
+  close1[i] = open[i]*coff1[2]+high[i]*coff1[3]+low[i]*coff1[4]
+}
+#displaying the final data
+close1
+
+close <- mydata[50:59,2]
+close2 <- mydata[50:59,1]
+
+plot( close1,close2, type="l", col="red" )
+par(new=TRUE)
+plot(close,close2,type = "l",col="green")
+
+
+
+
